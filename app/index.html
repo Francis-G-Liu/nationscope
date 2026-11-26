@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NationScope — Country Statistics, Plainly Presented</title>
+<meta name="description" content="NationScope compares headline statistics for ten major countries — population, GDP, life expectancy and more — each figure with its source and year.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#/">Nation<b>Scope</b></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="#/" data-route="home">Overview</a>
+      <a href="#/compare" data-route="compare">Compare</a>
+      <a href="#/about" data-route="about">About &amp; method</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap" id="view">
+  <noscript><p>NationScope needs JavaScript to show its tables and charts. All figures come from the World Bank, World Development Indicators, 2023.</p></noscript>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <span>NationScope — an independent country-statistics explorer.</span>
+    <span>Figures: World Bank, World Development Indicators, 2023. <a href="#/about">Method &amp; sources</a></span>
+  </div>
+</footer>
+<script src="data.js"></script>
+<script src="charts.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
