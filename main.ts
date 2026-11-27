@@ -11,20 +11,29 @@
 // In the grader, MAKEFUN_OUTPUT_DIR is unset and /output is used.
 
 import { cpSync, existsSync, mkdirSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { basename, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildDossier } from "./vendor/makefun-frontend.ts";
 
 const repoRoot = fileURLToPath(new URL(".", import.meta.url));
 const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
 
+// Dotfiles (.gitkeep, .DS_Store, ...) are not plain relative names: the
+// scorer rejects any output path starting with one, so skip every file or
+// directory whose name starts with a dot.
+const noDotfiles = (src: string) => !basename(src).startsWith(".");
+
 // Fresh output directory, then the two trees the entry is made of.
 mkdirSync(outDir, { recursive: true });
-cpSync(join(repoRoot, "app"), join(outDir, "app"), { recursive: true });
+cpSync(join(repoRoot, "app"), join(outDir, "app"), {
+  recursive: true,
+  filter: noDotfiles,
+});
 mkdirSync(join(outDir, "screenshots"), { recursive: true });
 if (existsSync(join(repoRoot, "screenshots"))) {
   cpSync(join(repoRoot, "screenshots"), join(outDir, "screenshots"), {
     recursive: true,
+    filter: noDotfiles,
   });
 }
 
